@@ -1,0 +1,13 @@
+---
+- name: Install tmux
+  become: true
+  apt:
+    name: tmux
+    state: present
+
+- name: Configure tmux
+  become: false
+  copy:
+    src: files/tmuxconf
+    dest: "{{ local_user_homedir }}/.tmux.conf"
+    mode: 0644
