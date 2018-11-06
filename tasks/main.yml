@@ -7,7 +7,7 @@
 
 - name: Configure tmux
   become: false
-  copy:
-    src: files/tmuxconf
+  template:
+    src: tmuxconf.j2
     dest: "{{ local_user_homedir }}/.tmux.conf"
     mode: 0644

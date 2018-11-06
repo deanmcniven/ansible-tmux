@@ -1,0 +1,51 @@
+set -g history-limit 1000000
+
+set -g base-index 1
+set -g pane-base-index 1
+
+bind | split-window -h -c '#{pane_current_path}'
+bind - split-window -v -c '#{pane_current_path}'
+
+bind h select-pane -L
+bind j select-pane -D
+bind k select-pane -U
+bind l select-pane -R
+bind -r H resize-pane -L {{ tmux_resize_pane_step_size }}
+bind -r J resize-pane -D {{ tmux_resize_pane_step_size }}
+bind -r K resize-pane -U {{ tmux_resize_pane_step_size }}
+bind -r L resize-pane -R {{ tmux_resize_pane_step_size }}
+
+set -g mode-keys vi
+
+unbind C-b
+{% set count = 1 %}
+{% for prefix in tmux_prefix_bindings %}
+{% if count == 1 %}
+set -g prefix '{{prefix}}'
+{% else %}
+set -g prefix{{count}} '{{prefix}}'
+{% endif %}
+{% set count = count + 1 %}
+{% endfor %}
+
+{% if tmux_renumber_windows %}
+set-option -g renumber-windows on
+{% else %}
+set-option -g renumber-windows off
+{% endif %}
+
+set-option -g status-position top
+
+{% if tmux_status_bar_fg_color is defined %}
+set -g status-fg {{tmux_status_bar_fg_color}}
+{% endif %}
+
+{% if tmux_status_bar_bg_color is defined %}
+set -g status-bg {{tmux_status_bar_bg_color}}
+{% endif %}
+
+{% if tmux_additional_config_lines is defined %}
+{% for configline in tmux_additional_config_lines %}
+{{configline}}
+{% endfor %}
+{% endif %}
