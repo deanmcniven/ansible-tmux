@@ -1,6 +1,7 @@
 ---
 tmux_resize_pane_step_size: 5
 tmux_renumber_windows: true
+tmux_allow_window_rename: false
 tmux_prefix_bindings:
   - C-o
 

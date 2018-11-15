@@ -34,6 +34,12 @@ set-option -g renumber-windows on
 set-option -g renumber-windows off
 {% endif %}
 
+{% if tmux_allow_window_rename %}
+set allow-rename on
+{% else %}
+set allow-rename off
+{% endif %}
+
 set-option -g status-position top
 
 {% if tmux_status_bar_fg_color is defined %}
