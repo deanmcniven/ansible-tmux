@@ -35,9 +35,9 @@ set-option -g renumber-windows off
 {% endif %}
 
 {% if tmux_allow_window_rename %}
-set allow-rename on
+setw -g automatic-rename on
 {% else %}
-set allow-rename off
+setw -g automatic-rename off
 {% endif %}
 
 set-option -g status-position top
