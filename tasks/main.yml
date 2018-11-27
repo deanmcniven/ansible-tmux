@@ -5,6 +5,13 @@
     name: tmux
     state: present
 
+- name: Install xclip
+  become: true
+  apt:
+    name: xclip
+    state: present
+  when: tmux_copy_to_system_clipboard
+
 - name: Configure tmux
   become: false
   template:

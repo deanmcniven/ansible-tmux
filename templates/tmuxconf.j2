@@ -55,3 +55,7 @@ set -g status-bg {{tmux_status_bar_bg_color}}
 {{configline}}
 {% endfor %}
 {% endif %}
+
+{% if tmux_copy_to_system_clipboard %}
+bind -T copy-mode-vi Enter send-keys -X copy-pipe-and-cancel "xclip -i -selection clipboard"
+{% endif %}
