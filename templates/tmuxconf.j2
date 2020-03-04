@@ -50,6 +50,12 @@ set -g status-fg {{tmux_status_bar_fg_color}}
 set -g status-bg {{tmux_status_bar_bg_color}}
 {% endif %}
 
+{% if tmux_install_battery_indicator %}
+set -g status-right '#{battery_icon} #{battery_percentage} | %a %d-%h %H:%M '
+{% else %}
+set -g status-right '%a %d-%h %H:%M '
+{% endif %}
+
 {% if tmux_additional_config_lines is defined %}
 {% for configline in tmux_additional_config_lines %}
 {{configline}}
