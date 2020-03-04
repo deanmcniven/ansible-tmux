@@ -6,6 +6,7 @@ Ansible role to install and configure tmux
 The following variables can be set to adjust the behaviour of the tmux role.
 * `tmux_resize_pane_step_size`: Step size when resizing a pane, Defaults to 5
 * `tmux_renumber_windows`: Renumber tmux windows, Defaults to true
+* `tmux_install_battery_indicator`: Install a battery indicator in the status bar, Defaults to true
 * `tmux_copy_to_system_clipboard`: Copy contents of tmux copy-buffer to system clipboard, Defaults to true
 * `tmux_allow_window_rename` : Allow apps to change the tmux window title, Defaults to false
 * `tmux_prefix_bindings`: List of bindings to use for tmux, Defaults to C-o

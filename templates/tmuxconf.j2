@@ -59,3 +59,7 @@ set -g status-bg {{tmux_status_bar_bg_color}}
 {% if tmux_copy_to_system_clipboard %}
 bind -T copy-mode-vi Enter send-keys -X copy-pipe-and-cancel "xclip -i -selection clipboard"
 {% endif %}
+
+{% if tmux_install_battery_indicator %}
+run-shell ~/.tmux_plugins/tmux-battery/battery.tmux
+{% endif %}

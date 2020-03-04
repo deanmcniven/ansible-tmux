@@ -12,6 +12,20 @@
     state: present
   when: tmux_copy_to_system_clipboard
 
+- name: Create Plugins Directory
+  become: false
+  file:
+    path: "{{ local_user_homedir }}/.tmux_plugins"
+    state: directory
+    recurse: yes
+
+- name: Install Tmux-Battery
+  become: false
+  git:
+    repo: https://github.com/tmux-plugins/tmux-battery
+    dest: "{{ local_user_homedir }}/.tmux_plugins/tmux-battery"
+  when: tmux_install_battery_indicator
+
 - name: Configure tmux
   become: false
   template:
