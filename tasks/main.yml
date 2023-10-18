@@ -1,16 +1,35 @@
 ---
-- name: Install tmux
+- name: Fail if Homebrew missing (MacOSX)
+  fail:
+    msg: Homebrew is not installed on this system
+  when:
+    - ansible_facts['distribution'] == "MacOSX"
+    - not homebrew_installed.stat.exists
+
+- name: Install tmux (Ubuntu)
   become: true
   apt:
     name: tmux
     state: present
+  when:
+    - ansible_facts['distribution'] == "Ubuntu"
 
-- name: Install xclip
+- name: Install tmux (MacOSX)
+  become: false
+  homebrew:
+    name: tmux
+    state: present
+  when:
+    - ansible_facts['distribution'] == "MacOSX"
+
+- name: Install xclip (Ubuntu)
   become: true
   apt:
     name: xclip
     state: present
-  when: tmux_copy_to_system_clipboard
+  when:
+    - tmux_copy_to_system_clipboard
+    - ansible_facts['distribution'] == "Ubuntu"
 
 - name: Create Plugins Directory
   become: false
